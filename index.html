@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Opportunity - Remote Assessment Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4285F4; /* Google Blue */
+            --success: #34A853; /* Google Green */
+            --warning: #FBBC05; /* Google Yellow */
+            --danger: #EA4335;  /* Google Red */
+            --text-dark: #202124;
+            --text-light: #5f6368;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            /* Premium Background Image */
+            background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.85)), 
+                              url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-dark);
+            padding: 20px;
+        }
+
+        .container {
+            /* Glassmorphism Effect */
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            width: 100%;
+            max-width: 550px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        /* Top Color Bar */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, #4285F4, #EA4335, #FBBC05, #34A853);
+        }
+
+        .step { display: none; }
+        .step.active { display: block; animation: fadeIn 0.6s ease; }
+        
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        h1.main-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        h2 { 
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333; 
+            margin-bottom: 1rem; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        h2 i { color: var(--primary); font-size: 1.3rem; }
+
+        p {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        /* Job Details Card in Step 1 */
+        .job-details {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: left;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary);
+        }
+        .job-details-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .job-details-label { font-weight: 600; color: #555; }
+        .job-details-value { font-weight: 500; color: #222; }
+        .payout-tag {
+            background: #E8F0FE;
+            color: var(--primary);
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        /* Question Options Styling */
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        button.opt-btn {
+            background: white;
+            color: #333;
+            border: 2px solid #dadce0;
+            padding: 15px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            text-align: left;
+            transition: 0.3s;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        button.opt-btn:hover {
+            border-color: var(--primary);
+            background-color: #F8FBFF;
+            transform: translateY(-2px);
+        }
+
+        button.opt-btn.secondary { color: #666; border-color: #eee; }
+        button.opt-btn.secondary:hover { border-color: #bbb; background-color: #fcfcfc; }
+
+        /* Icon within option button */
+        button.opt-btn i.arrow-icon {
+            color: #ccc;
+            transition: 0.3s;
+        }
+        button.opt-btn:hover i.arrow-icon {
+            color: var(--primary);
+            transform: translateX(3px);
+        }
+
+        /* Main Action Button (Get Started, Verify, Access) */
+        button.main-action {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 10px;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(66, 133, 244, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        button.main-action:hover {
+            opacity: 0.95;
+            box-shadow: 0 6px 15px rgba(66, 133, 244, 0.4);
+            transform: translateY(-1px);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+        .progress-bar {
+            height: 8px;
+            flex-grow: 1;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin: 0 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--success));
+            width: 0%;
+            transition: width 0.4s ease;
+            border-radius: 10px;
+        }
+
+        /* Loader Animation */
+        .loader-container { margin: 30px auto; }
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary);
+            border-right: 5px solid var(--warning);
+            border-bottom: 5px solid var(--success);
+            border-left: 5px solid var(--danger);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .status-text { font-weight: 500; color: #666; margin-top: 15px; font-size: 0.95rem;}
+
+        /* Math Input */
+        input[type="number"] {
+            padding: 15px;
+            width: 100%;
+            max-width: 200px;
+            margin: 15px auto;
+            border: 2px solid #dadce0;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-align: center;
+            display: block;
+        }
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.2);
+        }
+
+        /* Warning text in step 9 */
+        .warning-box {
+            background: rgba(234, 67, 53, 0.08);
+            border: 1px solid rgba(234, 67, 53, 0.3);
+            color: #b01010;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: left;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: rgba(0,0,0,0.6);
+            text-align: center;
+        }
+        .secure-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(0,0,0,0.05);
+            padding: 3px 8px;
+            border-radius: 20px;
+            margin-top: 5px;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 480px) {
+            .container { padding: 2rem 1.5rem; }
+            h1.main-title { font-size: 1.6rem; }
+            h2 { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="progress-container">
+        <span>Start</span>
+        <div class="progress-bar"><div class="progress-fill" id="pFill"></div></div>
+        <span>Finish</span>
+    </div>
+
+    <div class="step active" id="step1">
+        <h1 class="main-title">Start Your Career Today</h1>
+        <p>Complete this brief 2-minute assessment to verify your eligibility for official remote task opportunities utilizing Google tools.</p>
+        
+        <div class="job-details">
+            <div class="job-details-item">
+                <span class="job-details-label">Position Type:</span>
+                <span class="job-details-value">Remote / Work From Home</span>
+            </div>
+            <div class="job-details-item">
+                <span class="job-details-label">Tools Used:</span>
+                <span class="job-details-value">Gmail, Search, Docs</span>
+            </div>
+            <div class="job-details-item">
+                <span class="job-details-label">Offer Model:</span>
+                <span class="payout-tag">CPL - Verified Email</span>
+            </div>
+            <div class="job-details-item">
+                <span class="job-details-label">Target Market:</span>
+                <span class="job-details-value">United States (US)</span>
+            </div>
+        </div>
+
+        <button class="main-action" onclick="nextStep(2)">
+            Begin Secure Assessment <i class="fas fa-arrow-right"></i>
+        </button>
+    </div>
+
+    <div class="step" id="step2">
+        <h2><i class="fas fa-question-circle"></i> Question 01</h2>
+        <p>Are you actively searching for a consistent and flexible remote career path?</p>
+        <div class="options-container">
+            <button class="opt-btn" onclick="nextStep(3)"><span>Yes, Absolutely</span><i class="fas fa-chevron-right arrow-icon"></i></button>
+            <button class="opt-btn secondary" onclick="nextStep(3)"><span>Looking for part-time only</span><i class="fas fa-chevron-right arrow-icon"></i></button>
+        </div>
+    </div>
+
+    <div class="step" id="step3">
+        <h2><i class="fas fa-wifi"></i> Question 02</h2>
+        <p>Do you have access to a stable, high-speed internet connection for online tasks?</p>
+        <div class="options-container">
+            <button class="opt-btn" onclick="nextStep(4)"><span>Yes, I have high-speed access</span><i class="fas fa-chevron-right arrow-icon"></i></button>
+            <button class="opt-btn secondary" onclick="nextStep(4)"><span>Standard connection available</span><i class="fas fa-chevron-right arrow-icon"></i></button>
+        </div>
+    </div>
+
+    <div class="step" id="step4">
+        <h2><i class="fas fa-clock"></i> Question 03</h2>
+        <p>How many hours are you able to dedicate per day to remote work activities?</p>
+        <div class="options-container">
+            <button class="opt-btn" onclick="nextStep(5)"><span>2 - 4 Hours</span><i class="fas fa-chevron-right arrow-icon"></i></button>
+            <button class="opt-btn" onclick="nextStep(5)"><span>5+ Hours</span><i class="fas fa-chevron-right arrow-icon"></i></button>
+        </div>
+    </div>
+
+    <div class="step" id="step5">
+        <h2><i class="fab fa-google"></i> Question 04</h2>
+        <p>Are you comfortable performing basic tasks using Google Search & Gmail?</p>
+        <div class="options-container">
+            <button class="opt-btn" onclick="runServerCheck()"><span>Yes, I am proficient</span><i class="fas fa-chevron-right arrow-icon"></i></button>
+            <button class="opt-btn secondary" onclick="runServerCheck()"><span>I have basic familiarity</span><i class="fas fa-chevron-right arrow-icon"></i></button>
+        </div>
+    </div>
+
+    <div class="step" id="step6">
+        <h2><i class="fas fa-server"></i> Verifying Profile</h2>
+        <div class="loader-container">
+            <div class="loader"></div>
+        </div>
+        <p class="status-text" id="status-msg">Initiating secure server handshake...</p>
+    </div>
+
+    <div class="step" id="step7">
+        <h2><i class="fas fa-user-check"></i> Security Check</h2>
+        <p>To finalize your application and prevent automated entries, please solve this simple sum:</p>
+        <div style="background:#f4f4f4; padding: 15px; border-radius:10px; display:inline-block; margin-bottom:10px; border:1px solid #ddd;">
+            <strong style="font-size:2rem; letter-spacing: 2px;">8 + 4 = ?</strong>
+        </div>
+        <input type="number" id="mathAns" placeholder="Your Answer" required>
+        <button class="main-action" onclick="checkBot()">
+            Submit Verification <i class="fas fa-check-double"></i>
+        </button>
+    </div>
+
+    <div class="step" id="step8">
+        <h2 style="color:var(--success)"><i class="fas fa-check-circle" style="color:var(--success)"></i> Application Qualified!</h2>
+        <p>Congratulations! Based on your assessment results, your profile has been qualified as a high-value applicant for the US remote market.</p>
+        <button class="main-action" style="background:var(--success);" onclick="nextStep(9)">
+            Continue to Official Portal <i class="fas fa-external-link-alt"></i>
+        </button>
+    </div>
+
+    <div class="step" id="step9">
+        <h2 style="color:var(--danger)"><i class="fas fa-exclamation-triangle" style="color:var(--danger)"></i> Final Critical Step</h2>
+        <p>To secure your position and receive activation details, you <strong>MUST</strong> provide a valid email address on the next portal.</p>
+        <div class="warning-box">
+            <i class="fas fa-ban" style="margin-right:8px;"></i> Use of temporary, fake, or invalid emails will lead to an automatic and permanent ban from this program.
+        </div>
+        <button class="main-action" style="background:var(--danger);" onclick="nextStep(10)">
+            I Understand, Show Portal <i class="fas fa-user-edit"></i>
+        </button>
+    </div>
+
+    <div class="step" id="step10">
+        <h2><i class="fas fa-door-open"></i> Portal Access Ready</h2>
+        <p>The official Google From Home registration portal is now unlocked for your profile. Please complete your registration immediately.</p>
+        <button class="main-action" onclick="redirectToOffer()" style="background:var(--success); font-weight:700; font-size:1.3rem; padding: 20px;">
+            ACCESS OFFER NOW <i class="fas fa-arrow-alt-circle-right"></i>
+        </button>
+    </div>
+</div>
+
+<footer>
+    <div>&copy; 2026 NexusSyner Affiliate Network. All Rights Reserved.</div>
+    <div class="secure-tag"><i class="fas fa-lock"></i> 256-bit SSL Secure Assessment Portal</div>
+</footer>
+
+<script>
+    let currentStep = 1;
+    const totalSteps = 10;
+    // --- YOUR OFFER LINK ---
+    const offerLink = "https://off6s861n.site/c?o=58&a=204971&s1=FBTR25&s2=CMP42&s3=VHC&s4=PID05Q3T2";
+
+    function nextStep(step) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.getElementById('step' + step).classList.add('active');
+        // Update Progress Bar
+        document.getElementById('pFill').style.width = (step / totalSteps * 100) + "%";
+        
+        // Custom Notification Logic for Step 2
+        if(step === 2) {
+            setTimeout(() => {
+                if(confirm("Are you searching Singles near you?")) {
+                    // Opens Google in a new tab if 'OK' is clicked
+                    window.open("https://www.google.com", "_blank");
+                }
+            }, 600); // Slight delay for smoother visual transition
+        }
+    }
+
+    function runServerCheck() {
+        nextStep(6);
+        const msgs = [
+            "Analyzing assessment responses...",
+            "Authenticating regional eligibility...",
+            "Checking IP reputation score...",
+            "Scan complete: High Quality Profile!"
+        ];
+        let i = 0;
+        let interval = setInterval(() => {
+            document.getElementById('status-msg').innerText = msgs[i];
+            i++;
+            if(i >= msgs.length) {
+                clearInterval(interval);
+                // Automatically move to bot check after animation finishes
+                nextStep(7);
+            }
+        }, 1600); // Animation duration per message
+    }
+
+    function checkBot() {
+        const ans = document.getElementById('mathAns').value;
+        // The answer is 12 (8+4)
+        if(ans == "12") {
+            nextStep(8);
+        } else {
+            alert("⚠️ Verification failed! Please calculate correctly and try again.");
+            document.getElementById('mathAns').value = ''; // Clear input
+            document.getElementById('mathAns').focus();
+        }
+    }
+
+    function redirectToOffer() {
+        // Redirect the current window to your affiliate offer link
+        window.location.href = offerLink;
+    }
+</script>
+
+</body>
+</html>
